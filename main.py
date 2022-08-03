@@ -22,6 +22,7 @@ def main():
     checks = get_data(checks_url)
     isStat = False
     isCheck = False
+    print(statuses,check)
     for stat in statuses:
         if stat["context"] == name:
             isStat = True
@@ -61,14 +62,12 @@ def main():
 
 def getStatStatus():
     temp_statuses = get_data(statuses_url)
-    print(temp_statuses)
     for stat in temp_statuses:
         if stat["context"] == name:
             return stat["state"]
 
 def getCheckStatus():
     temp_checks = get_data(checks_url)
-    print(temp_checks)
     for check in temp_checks:
         if check["name"] == name:
             return check["state"]
