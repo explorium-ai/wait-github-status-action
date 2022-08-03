@@ -53,6 +53,7 @@ def main():
         status_code = "in_progress"
         while status_code not in {'success', 'failed'}:
             status_code = getStatStatus()
+            print("In Progress")
             time.sleep(1)
             passed = passed + 1
             if timeout == passed:
