@@ -12,8 +12,8 @@ name = os.environ["INPUT_NAME"]
 strict = (True if (os.environ["INPUT_STRICT"] == "true") else False)
 timeout = (0 if (os.environ["INPUT_TIMEOUT"] == "") else int(os.environ["INPUT_TIMEOUT"]))
 
-statuses_url = f"{git_api}/repos/{repo}/commits/${sha}/status"
-checks_url = f"{git_api}/repos/{repo}/commits/${sha}/check-runs"
+statuses_url = f"{git_api}/repos/{repo}/commits/{sha}/status"
+checks_url = f"{git_api}/repos/{repo}/commits/{sha}/check-runs"
 passed = 0
 
 def main():
