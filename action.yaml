@@ -1,0 +1,29 @@
+name: "Wait Github Status Action"
+description: "Wait for a Github status check, both internal (Actions) and external (eg. Jenkins)"
+author: "Explorium DevOps Team"
+branding:
+  icon: battery-charging
+  color: blue
+inputs:
+  name:
+    description: 'The name of the check (eg. Lint, pr-head, Test, etc.)'
+    required: true
+    default: ''
+  strict:
+    description: 'Wait for it to finish successfully, not just end.'
+    required: false
+    default: 'true'
+  timeout:
+    description: 'If not empty, wait for that amount of seconds before failing.'
+    required: false
+    default: ''  
+  token:
+    description: 'Github API token'
+    required: true
+    default: ''      
+outputs:
+  result:
+    description: "Output from the action"    
+runs:
+  using: "docker"
+  image: "Dockerfile"
