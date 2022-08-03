@@ -17,6 +17,7 @@ checks_url = f"{git_api}/repos/{repo}/commits/${sha}/check-runs"
 passed = 0
 
 def main():
+    print(statuses_url,checks_url)
     statuses = get_data(statuses_url)
     checks = get_data(checks_url)
     isStat = False
