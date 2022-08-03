@@ -22,7 +22,7 @@ def main():
     checks = get_data(checks_url)
     isStat = False
     isCheck = False
-    print(statuses,check)
+    print(statuses,checks)
     for stat in statuses:
         if stat["context"] == name:
             isStat = True
