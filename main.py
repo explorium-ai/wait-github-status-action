@@ -78,7 +78,7 @@ def get_data(url):
     )    
     if resp.status_code != 200:
         raise Exception(
-            "Bad response from application: " + str(resp.status_code) + " / " + resp.headers + " / " + resp.text
+            "Bad response from application: " + str(resp.status_code) + " / " + str(resp.headers) + " / " + str(resp.text)
         )
     else:
         data = json.loads(str(resp.text).replace("'", ""))
