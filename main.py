@@ -5,7 +5,7 @@ import time
 import sys
 
 git_api = os.environ["GITHUB_API_URL"]
-repo = os.environ["GITHUB_ACTION_REPOSITORY"]
+repo = os.environ["GITHUB_REPOSITORY"]
 sha = os.environ["GITHUB_SHA"]
 token = os.environ["INPUT_TOKEN"]
 name = os.environ["INPUT_NAME"]
