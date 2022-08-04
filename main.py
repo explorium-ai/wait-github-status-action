@@ -28,12 +28,11 @@ def main():
         time.sleep(1)
     isStat = False
     isCheck = False
-    print(statuses)
-    for stat in statuses:
+    for stat in statuses["statuses"]:
         print(stat)
         if stat["context"] == name:
             isStat = True
-    for check in checks:
+    for check in checks["check_runs"]:
         print(check)
         if check["name"] == name:
             isCheck = True
@@ -71,13 +70,13 @@ def main():
 
 def getStatStatus():
     temp_statuses = get_data(statuses_url)
-    for stat in temp_statuses:
+    for stat in temp_statuses["statuses"]:
         if stat["context"] == name:
             return stat["state"]
 
 def getCheckStatus():
     temp_checks = get_data(checks_url)
-    for check in temp_checks:
+    for check in temp_checks["check_runs"]:
         if check["name"] == name:
             return check["state"]
 
