@@ -57,7 +57,11 @@ def main():
         print("This is a Check")
         status_code = "in_progress"
         while status_code not in {'success', 'failed'}:
-            status_code = getStatStatus()
+            temp = getStatStatus()
+            if temp["status"] != "in_progress":
+                status_code = temp["conclusion"]
+            else:
+                status_code = temp["status"]
             print("In Progress " + status_code)    
             time.sleep(1)
             PASSED = PASSED + 1
@@ -81,7 +85,7 @@ def getCheckStatus():
     temp_checks = get_data(checks_url)
     for check in temp_checks["check_runs"]:
         if check["name"] == name:
-            return check["status"]
+            return {"status": check["status"],"conclusion": check["conclusion"]}
 
 def get_data(url):
     resp = requests.request(
