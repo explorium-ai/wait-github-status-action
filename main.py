@@ -25,17 +25,18 @@ def wait():
         if (statuses["total_count"] != 0) or (checks["total_count"] != 0):
             for stat in statuses["statuses"]:
                 if stat["context"] == name:
-                    total_count = 1
                     IS_STAT = True
+                    total_count = 1
             for check in checks["check_runs"]:
                 if check["name"] == name:
-                    total_count = 1
                     IS_CHECK = True
+                    total_count = 1
         print("Waiting for Runs to start")
         time.sleep(1)
 def main():
     print(statuses_url,checks_url)
     wait()
+    print("stat",IS_STAT,"check",IS_CHECK)
     if IS_STAT:
         print("This is a Status")
         status_code = "pending"
