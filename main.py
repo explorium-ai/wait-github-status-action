@@ -22,8 +22,6 @@ def main():
     while total_count == 0:
         statuses = get_data(statuses_url)
         checks = get_data(checks_url)
-        print(statuses,checks)
-        print(statuses["total_count"],checks["total_count"])
         if (statuses["total_count"] != 0) or (checks["total_count"] != 0):
             total_count = 1
         print("Waiting for Runs to start")
