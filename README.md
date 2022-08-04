@@ -35,7 +35,7 @@ The result of the Status/Check Run
 ## Example usage
 
 ```yaml
-uses: explorium-ai/wait-github-status-action@v1.0.1
+uses: explorium-ai/wait-github-status-action@v1.0.2
 with:
   name: lint
   token: ${{ secrets.GITHUB_TOKEN }}
