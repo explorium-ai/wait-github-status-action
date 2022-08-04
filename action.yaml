@@ -20,7 +20,11 @@ inputs:
   token:
     description: 'Github API token'
     required: true
-    default: ''      
+    default: ''     
+  sha:
+    description: 'Automatically take the sha of the PR'
+    required: true
+    default: ${{ github.sha }}
 outputs:
   result:
     description: "Output from the action"    
