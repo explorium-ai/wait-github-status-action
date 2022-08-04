@@ -28,6 +28,7 @@ def main():
         time.sleep(1)
     isStat = False
     isCheck = False
+    print(statuses)
     for stat in statuses:
         print(stat)
         if stat["context"] == name:
