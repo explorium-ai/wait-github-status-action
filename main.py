@@ -14,11 +14,11 @@ timeout = (0 if (os.environ["INPUT_TIMEOUT"] == "") else int(os.environ["INPUT_T
 
 statuses_url = f"{git_api}/repos/{repo}/commits/{sha}/status"
 checks_url = f"{git_api}/repos/{repo}/commits/{sha}/check-runs"
-passed = 0
 
 def main():
     print(statuses_url,checks_url)
     total_count = 0
+    passed = 0
     while total_count == 0:
         statuses = get_data(statuses_url)
         checks = get_data(checks_url)
