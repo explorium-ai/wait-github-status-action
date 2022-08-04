@@ -24,7 +24,7 @@ inputs:
   sha:
     description: 'You must insert the sha of the PR'
     required: true
-    default: ${{ github.sha }}
+    default: ${{ github.event.pull_request.head.sha }}
 outputs:
   result:
     description: "Output from the action"    
