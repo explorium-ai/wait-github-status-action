@@ -37,9 +37,11 @@ def main():
     print(statuses_url,checks_url)
     wait()
     if IS_STAT:
+        print("This is a Status")
         status_code = "pending"
         while status_code not in {'success', 'failed'}:
             status_code = getStatStatus()
+            print("In Progress " + status_code)            
             time.sleep(1)
             PASSED = PASSED + 1
             if timeout == PASSED:
@@ -52,10 +54,11 @@ def main():
             print(f"::set-output name=result::Success")
             sys.exit(0)
     if IS_CHECK:
+        print("This is a Check")
         status_code = "in_progress"
         while status_code not in {'success', 'failed'}:
             status_code = getStatStatus()
-            print("In Progress")
+            print("In Progress " + status_code)    
             time.sleep(1)
             PASSED = PASSED + 1
             if timeout == PASSED:
@@ -78,7 +81,7 @@ def getCheckStatus():
     temp_checks = get_data(checks_url)
     for check in temp_checks["check_runs"]:
         if check["name"] == name:
-            return check["state"]
+            return check["status"]
 
 def get_data(url):
     resp = requests.request(
