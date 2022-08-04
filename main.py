@@ -15,7 +15,6 @@ timeout = (0 if (os.environ["INPUT_TIMEOUT"] == "") else int(os.environ["INPUT_T
 statuses_url = f"{git_api}/repos/{repo}/commits/{sha}/status"
 checks_url = f"{git_api}/repos/{repo}/commits/{sha}/check-runs"
 
-PASSED = 0
 def wait():
     total_count = 0
     IS_STAT = False
@@ -38,6 +37,7 @@ def wait():
         time.sleep(1)
     return {"stat":IS_STAT,"check":IS_CHECK}
 def main():
+    PASSED = 0
     print(statuses_url,checks_url)
     results = wait()
     if results["stat"]:
