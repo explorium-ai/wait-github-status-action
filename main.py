@@ -14,11 +14,12 @@ timeout = (0 if (os.environ["INPUT_TIMEOUT"] == "") else int(os.environ["INPUT_T
 
 statuses_url = f"{git_api}/repos/{repo}/commits/{sha}/status"
 checks_url = f"{git_api}/repos/{repo}/commits/{sha}/check-runs"
-IS_STAT = False
-IS_CHECK = False
+
 PASSED = 0
 def wait():
     total_count = 0
+    IS_STAT = False
+    IS_CHECK = False    
     while total_count == 0:
         statuses = get_data(statuses_url)
         checks = get_data(checks_url)
@@ -26,18 +27,20 @@ def wait():
             for stat in statuses["statuses"]:
                 if stat["context"] == name:
                     IS_STAT = True
+                    print("stat is true")
                     total_count = 1
             for check in checks["check_runs"]:
                 if check["name"] == name:
                     IS_CHECK = True
+                    print("check is true")
                     total_count = 1
         print("Waiting for Runs to start")
         time.sleep(1)
+    return {"stat":IS_STAT,"check":IS_CHECK}
 def main():
     print(statuses_url,checks_url)
-    wait()
-    print("stat",IS_STAT,"check",IS_CHECK)
-    if IS_STAT:
+    results = wait()
+    if results["stat"]:
         print("This is a Status")
         status_code = "pending"
         while status_code not in {'success', 'failed'}:
@@ -54,7 +57,7 @@ def main():
         else:
             print(f"::set-output name=result::Success")
             sys.exit(0)
-    if IS_CHECK:
+    if results["check"]:
         print("This is a Check")
         status_code = "in_progress"
         while status_code not in {'success', 'failed'}:
