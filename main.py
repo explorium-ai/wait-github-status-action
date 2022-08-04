@@ -26,6 +26,7 @@ def main():
         if (statuses["total_count"] != 0) or (checks["total_count"] != 0):
             total_count = 1
         print("Waiting for Runs to start")
+        time.sleep(1)
     isStat = False
     isCheck = False
     print(statuses,checks)
