@@ -22,7 +22,7 @@ inputs:
     required: true
     default: ''     
   sha:
-    description: 'Automatically take the sha of the PR'
+    description: 'You must insert the sha of the PR'
     required: true
     default: ${{ github.sha }}
 outputs:
