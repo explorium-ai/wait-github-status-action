@@ -14,35 +14,37 @@ timeout = (0 if (os.environ["INPUT_TIMEOUT"] == "") else int(os.environ["INPUT_T
 
 statuses_url = f"{git_api}/repos/{repo}/commits/{sha}/status"
 checks_url = f"{git_api}/repos/{repo}/commits/{sha}/check-runs"
-
-def main():
-    print(statuses_url,checks_url)
+IS_STAT = False
+IS_CHECK = False
+PASSED = 0
+def wait():
     total_count = 0
-    passed = 0
     while total_count == 0:
         statuses = get_data(statuses_url)
         checks = get_data(checks_url)
         if (statuses["total_count"] != 0) or (checks["total_count"] != 0):
-            total_count = 1
+            for stat in statuses["statuses"]:
+                print(stat)
+                if stat["context"] == name:
+                    total_count = 1
+                    IS_STAT = True
+            for check in checks["check_runs"]:
+                print(check)
+                if check["name"] == name:
+                    total_count = 1
+                    IS_CHECK = True
         print("Waiting for Runs to start")
         time.sleep(1)
-    isStat = False
-    isCheck = False
-    for stat in statuses["statuses"]:
-        print(stat)
-        if stat["context"] == name:
-            isStat = True
-    for check in checks["check_runs"]:
-        print(check)
-        if check["name"] == name:
-            isCheck = True
-    if isStat:
+def main():
+    print(statuses_url,checks_url)
+    wait()
+    if IS_STAT:
         status_code = "pending"
         while status_code not in {'success', 'failed'}:
             status_code = getStatStatus()
             time.sleep(1)
-            passed = passed + 1
-            if timeout == passed:
+            PASSED = PASSED + 1
+            if timeout == PASSED:
                 sys.exit("Timeout Reached")            
         if status_code != "success":
             print(f"::set-output name=result::Failed")
@@ -51,14 +53,14 @@ def main():
         else:
             print(f"::set-output name=result::Success")
             sys.exit(0)
-    if isCheck:
+    if IS_CHECK:
         status_code = "in_progress"
         while status_code not in {'success', 'failed'}:
             status_code = getStatStatus()
             print("In Progress")
             time.sleep(1)
-            passed = passed + 1
-            if timeout == passed:
+            PASSED = PASSED + 1
+            if timeout == PASSED:
                 sys.exit("Timeout Reached")
         if status_code != "success":
             print(f"::set-output name=result::Failed")
