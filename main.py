@@ -6,7 +6,7 @@ import sys
 
 git_api = os.environ["GITHUB_API_URL"]
 repo = os.environ["GITHUB_REPOSITORY"]
-sha = os.environ["GITHUB_SHA"]
+sha = os.environ["INPUT_SHA"]
 token = os.environ["INPUT_TOKEN"]
 name = os.environ["INPUT_NAME"]
 strict = (True if (os.environ["INPUT_STRICT"] == "true") else False)
