@@ -19,7 +19,11 @@ timeout:
 token:
   description: 'Github API token'
   required: true
-  default: ''          
+  default: ''       
+sha:
+  description: 'You must insert the sha of the PR'
+  required: true
+  default: ${{ github.event.pull_request.head.sha }}    
 ```
 
 ## Outputs
@@ -35,4 +39,5 @@ uses: explorium-ai/wait-github-status-action@v1.0.1
 with:
   name: lint
   token: ${{ secrets.GITHUB_TOKEN }}
+  sha: ${{ github.event.pull_request.head.sha }} # Must
 ```
