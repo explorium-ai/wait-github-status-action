@@ -24,12 +24,10 @@ def wait():
         checks = get_data(checks_url)
         if (statuses["total_count"] != 0) or (checks["total_count"] != 0):
             for stat in statuses["statuses"]:
-                print(stat)
                 if stat["context"] == name:
                     total_count = 1
                     IS_STAT = True
             for check in checks["check_runs"]:
-                print(check)
                 if check["name"] == name:
                     total_count = 1
                     IS_CHECK = True
