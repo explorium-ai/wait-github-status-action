@@ -31,9 +31,11 @@ def main():
     isStat = False
     isCheck = False
     for stat in statuses:
+        print(stat)
         if stat["context"] == name:
             isStat = True
     for check in checks:
+        print(check)
         if check["name"] == name:
             isCheck = True
     if isStat:
