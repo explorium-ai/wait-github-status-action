@@ -16,6 +16,10 @@ timeout:
   description: 'If not empty, wait for that amount of seconds before failing.'
   required: false
   default: ''  
+seconds:
+  description: 'Time to wait between each API wait poll check.'
+  required: false
+  default: '10'    
 token:
   description: 'Github API token'
   required: true

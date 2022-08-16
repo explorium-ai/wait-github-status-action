@@ -11,6 +11,7 @@ token = os.environ["INPUT_TOKEN"]
 name = os.environ["INPUT_NAME"]
 strict = (True if (os.environ["INPUT_STRICT"] == "true") else False)
 timeout = (0 if (os.environ["INPUT_TIMEOUT"] == "") else int(os.environ["INPUT_TIMEOUT"]))
+seconds = (1 if (os.environ["INPUT_SECONDS"] == "") else int(os.environ["INPUT_SECONDS"]))
 
 statuses_url = f"{git_api}/repos/{repo}/commits/{sha}/status"
 checks_url = f"{git_api}/repos/{repo}/commits/{sha}/check-runs"
@@ -34,7 +35,7 @@ def wait():
                     print("check is true")
                     total_count = 1
         print("Waiting for Runs to start")
-        time.sleep(1)
+        time.sleep(seconds)
     return {"stat":IS_STAT,"check":IS_CHECK}
 def main():
     PASSED = 0
